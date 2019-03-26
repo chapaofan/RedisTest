@@ -1,0 +1,40 @@
+server:
+  port: 8080
+spring:
+  devtools:
+    restart:
+      enabled: true  #设置开启热部署
+  freemarker:
+    cache: false    #页面不加载缓存，修改即时生效
+  #数据库配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=GMT&useSSL=true
+    username: root
+    password: 168168
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  session:
+    store-type: redis
+  # redis相关配置
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password: 123456
+    jedis:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制）
+        max-active: 8
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+        # 连接池中的最大空闲连接
+        max-idle: 8
+        # 连接池中的最小空闲连接
+        min-idle: 0
+    # 连接超时时间（毫秒）默认是2000ms
+    timeout: 2000ms
+  cache:
+    redis:
+      ## Entry expiration in milliseconds. By default the entries never expire.
+      time-to-live: 1d
+      #写入redis时是否使用键前缀。
+      use-key-prefix: true
