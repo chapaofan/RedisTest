@@ -31,7 +31,7 @@ public class testController {
      */
     @RequestMapping("/getUser")
     @Cacheable("userCache")
-    public User getPrud(@RequestParam(required = true) String userId) {
+    public User getUser(@RequestParam(required = true) String userId) {
         System.out.println("如果没有缓存，就会调用下面方法，如果有缓存，则直接输出，不会输出此段话");
         return userDao.getUser(Integer.parseInt(userId));
     }
