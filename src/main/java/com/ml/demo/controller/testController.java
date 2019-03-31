@@ -8,8 +8,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.annotation.Resource;
+import java.io.Serializable;
 
 /**
  * @Author: MaoLin
@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 
 
 @RestController
-public class testController {
+public class testController implements Serializable {
     @Resource
     private UserDao userDao;
 

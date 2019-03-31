@@ -1,8 +1,7 @@
 package com.ml.demo.entity;
 
 import lombok.Data;
-
-import java.io.Serializable;
+        import java.io.Serializable;
 
 /**
  * @Author: MaoLin
@@ -18,6 +17,9 @@ public class User implements Serializable {
     private String userName;
 
     private String userPassword;
+
+    public User() {
+    }
 
     public User(int userId, String userName, String userPassword) {
         this.userId = userId;

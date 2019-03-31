@@ -1,7 +1,10 @@
 package com.ml.demo.dao;
 
 import com.ml.demo.entity.User;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+
+import java.io.Serializable;
 
 /**
  * @Author: MaoLin
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDao {
 
+    //@Cacheable("userCache")
     public User getUser(int userId) {
         System.out.println("执行此方法，说明没有缓存，如果没有走到这里，就说明缓存成功了");
         User user = new User(userId, "没有缓存_"+userId, "password_"+userId);
