@@ -14,16 +14,10 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
-
-import javax.crypto.KeyGenerator;
 import java.io.Serializable;
-import java.lang.reflect.Method;
 import java.time.Duration;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @Author: MaoLin
@@ -44,9 +38,6 @@ public class RedisConfig implements Serializable {
     public RedisCacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
         return RedisCacheManager.create(redisConnectionFactory);
     }
-
-
-
 
     @Bean
     public RedisTemplate redisTemplate(RedisConnectionFactory factory) {
@@ -84,22 +75,15 @@ public class RedisConfig implements Serializable {
         Map<String, RedisCacheConfiguration> redisCacheConfigurationMap = new HashMap<>();
         //SsoCache和BasicDataCache进行过期时间配置
         redisCacheConfigurationMap.put("userCache", this.getRedisCacheConfigurationWithTtl( 60));
-        redisCacheConfigurationMap.put("BasicDataCache", this.getRedisCacheConfigurationWithTtl(30 * 60));
         return redisCacheConfigurationMap;
     }
 
     private RedisCacheConfiguration getRedisCacheConfigurationWithTtl(Integer seconds) {
-
-
-
-
-
         Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
         jackson2JsonRedisSerializer.setObjectMapper(om);
-
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig();
         redisCacheConfiguration = redisCacheConfiguration.serializeValuesWith(
                 RedisSerializationContext
